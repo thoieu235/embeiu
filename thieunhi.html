@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Ngày Quốc Tế Thiếu Nhi 1/6</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&family=Dancing+Script:wght@700&display=swap');
+        
+        body {
+            font-family: 'Baloo 2', cursive;
+            background: linear-gradient(135deg, #ffedf5, #ffe0ed);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .candy-button {
+            background: linear-gradient(to bottom, #ffb3d9, #ff99cc);
+            border-radius: 30px;
+            box-shadow: 0 6px 0 #ff80bf, 0 8px 10px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        
+        .candy-button:hover {
+            transform: translateY(2px);
+            box-shadow: 0 4px 0 #ff80bf, 0 6px 8px rgba(0,0,0,0.1);
+        }
+        
+        .candy-button:active {
+            transform: translateY(6px);
+            box-shadow: 0 0 0 #ff80bf, 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .candy-input {
+            border: 3px solid #ffb3d9;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .candy-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(255, 179, 217, 0.3);
+            border: 4px solid #ffcce6;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Loading animation */
+        .loading-container {
+            width: 300px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: 2px solid #ffcce6;
+        }
+        
+        .loading-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, #ffcce6, #ff99cc);
+            border-radius: 8px;
+            transition: width 0.1s ease;
+        }
+        
+        /* Car animation */
+        .car-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            display: none;
+        }
+        
+        .car {
+            position: absolute;
+            top: 50%;
+            left: -150px;
+            transform: translateY(-50%);
+            width: 150px;
+            height: 80px;
+            animation: carDrive 3s linear forwards;
+        }
+        
+        @keyframes carDrive {
+            0% {
+                left: -150px;
+            }
+            100% {
+                left: calc(100% + 150px);
+            }
+        }
+        
+        /* Certificate styles - IMPROVED */
+        .certificate {
+            background-color: #fff;
+            border-radius: 15px;
+            position: relative;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .certificate::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            border: 2px solid #ffb3d9;
+            border-radius: 10px;
+            pointer-events: none;
+        }
+        
+        .certificate-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 8px solid transparent;
+            border-image: linear-gradient(45deg, #ffb3d9, #ff99cc, #ffcce6, #ff99cc, #ffb3d9) 1;
+            border-radius: 15px;
+            pointer-events: none;
+        }
+        
+        .certificate-corner {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            pointer-events: none;
+        }
+        
+        .corner-top-left {
+            top: 5px;
+            left: 5px;
+        }
+        
+        .corner-top-right {
+            top: 5px;
+            right: 5px;
+            transform: rotate(90deg);
+        }
+        
+        .corner-bottom-left {
+            bottom: 5px;
+            left: 5px;
+            transform: rotate(270deg);
+        }
+        
+        .corner-bottom-right {
+            bottom: 5px;
+            right: 5px;
+            transform: rotate(180deg);
+        }
+        
+        .certificate-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #ff66a3;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .certificate-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #ffb3d9, transparent);
+        }
+        
+        .certificate-ribbon {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 60px;
+            overflow: hidden;
+            z-index: 5;
+        }
+        
+        /* Improved flower styles */
+        .flower-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .flower {
+            position: relative;
+            width: 140px;
+            height: 140px;
+        }
+        
+        .petal {
+            position: absolute;
+            width: 55px;
+            height: 85px;
+            background: linear-gradient(to bottom, #ffcce6, #ff99cc);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            top: 20px;
+            left: 42px;
+            transform-origin: center bottom;
+            box-shadow: 0 0 10px rgba(255, 179, 217, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .petal:nth-child(1) {
+            transform: rotate(0deg) translateY(-30px);
+        }
+        
+        .petal:nth-child(2) {
+            transform: rotate(72deg) translateY(-30px);
+        }
+        
+        .petal:nth-child(3) {
+            transform: rotate(144deg) translateY(-30px);
+        }
+        
+        .petal:nth-child(4) {
+            transform: rotate(216deg) translateY(-30px);
+        }
+        
+        .petal:nth-child(5) {
+            transform: rotate(288deg) translateY(-30px);
+        }
+        
+        .flower-center {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #ffcce6, #ffb3d9);
+            border-radius: 50%;
+            top: 40px;
+            left: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #ff66a3;
+            font-size: 1.5rem;
+            z-index: 2;
+            box-shadow: 0 0 15px rgba(255, 179, 217, 0.5);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+        }
+        
+        .flower::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 40px;
+            background: linear-gradient(to bottom, #ffb3d9, #a0d6b4);
+            bottom: -20px;
+            left: 65px;
+            border-radius: 5px;
+            z-index: 1;
+        }
+        
+        .flower-leaf {
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            background: #a0d6b4;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            bottom: -5px;
+            z-index: 0;
+        }
+        
+        .flower-leaf:nth-child(1) {
+            left: 45px;
+            transform: rotate(-30deg);
+        }
+        
+        .flower-leaf:nth-child(2) {
+            right: 45px;
+            transform: rotate(30deg);
+        }
+        
+        /* Background flowers */
+        .bg-flower {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        
+        @keyframes sway {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(5deg);
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center p-4">
+    <!-- Background flowers -->
+    <div id="bg-flowers"></div>
+    
+    <!-- Loading Page -->
+    <div id="loading-page" class="candy-card p-8 w-full max-w-md text-center">
+        <h1 class="text-3xl font-bold text-pink-400 mb-6">Chúc Mừng Ngày Quốc Tế Thiếu Nhi 1/6</h1>
+        
+        <div class="mb-8">
+            <p class="text-xl text-pink-400 mb-4">Đang chuẩn bị quà cho bé...</p>
+            
+            <div class="loading-container mx-auto mb-4">
+                <div id="loading-bar" class="loading-bar"></div>
+            </div>
+            
+            <p id="loading-percentage" class="text-lg text-pink-400">0%</p>
+        </div>
+    </div>
+    
+    <!-- Form Page -->
+    <div id="form-page" class="candy-card p-8 w-full max-w-md text-center hidden">
+        <h1 class="text-3xl font-bold text-pink-400 mb-6">Chúc Mừng Ngày Quốc Tế Thiếu Nhi 1/6</h1>
+        
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold text-pink-500 mb-4">Em bé nhà mình tên gì nhỉ?</h2>
+            
+            <div class="mb-6">
+                <input type="text" id="child-name" class="candy-input w-full px-4 py-3 text-lg text-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-300" placeholder="Nhập tên em bé vào đây...">
+            </div>
+            
+            <button id="submit-btn" class="candy-button w-full py-3 px-6 text-xl font-bold text-white">
+                Nhận Quà
+            </button>
+        </div>
+    </div>
+    
+    <!-- Car Animation Container -->
+    <div id="car-container" class="car-container">
+        <div class="car">
+            <svg width="150" height="80" viewBox="0 0 150 80" xmlns="http://www.w3.org/2000/svg">
+                <!-- Car body -->
+                <rect x="20" y="35" width="110" height="30" rx="10" fill="#ffb3d9" />
+                <!-- Car top -->
+                <rect x="45" y="15" width="60" height="20" rx="8" fill="#ffb3d9" />
+                <!-- Windows -->
+                <rect x="50" y="20" width="50" height="15" rx="5" fill="#ffffff" fill-opacity="0.8" />
+                <!-- Wheels -->
+                <circle cx="40" cy="65" r="12" fill="#333333" />
+                <circle cx="40" cy="65" r="6" fill="#666666" />
+                <circle cx="110" cy="65" r="12" fill="#333333" />
+                <circle cx="110" cy="65" r="6" fill="#666666" />
+                <!-- Lights -->
+                <rect x="130" y="40" width="10" height="8" rx="4" fill="#ffff99" />
+                <rect x="10" y="40" width="10" height="8" rx="4" fill="#ff6666" />
+                <!-- Gift box -->
+                <rect x="75" y="5" width="15" height="15" fill="#ff99cc" />
+                <rect x="80" y="0" width="5" height="5" fill="#ffcce6" />
+                <rect x="80" y="5" width="5" height="15" fill="#ffcce6" />
+            </svg>
+        </div>
+    </div>
+    
+    <!-- Greeting Page -->
+    <div id="greeting-page" class="candy-card p-8 w-full max-w-md text-center hidden">
+        <h1 class="text-3xl font-bold text-pink-400 mb-6">Chúc Mừng Ngày Thiếu Nhi 1/6!</h1>
+        
+        <div class="mb-8">
+            <!-- Improved Certificate Design -->
+            <div class="certificate p-6 mb-6">
+                <div class="certificate-border"></div>
+                
+                <!-- Corner decorations -->
+                <div class="certificate-corner corner-top-left">
+                    <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0,0 L30,0 C20,10 10,20 0,30 L0,0 Z" fill="#ffcce6" />
+                        <path d="M0,0 L20,0 C15,5 10,10 5,15 C0,20 0,0 0,0 Z" fill="#ff99cc" />
+                    </svg>
+                </div>
+                
+                <div class="certificate-corner corner-top-right">
+                    <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0,0 L30,0 C20,10 10,20 0,30 L0,0 Z" fill="#ffcce6" />
+                        <path d="M0,0 L20,0 C15,5 10,10 5,15 C0,20 0,0 0,0 Z" fill="#ff99cc" />
+                    </svg>
+                </div>
+                
+                <div class="certificate-corner corner-bottom-left">
+                    <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0,0 L30,0 C20,10 10,20 0,30 L0,0 Z" fill="#ffcce6" />
+                        <path d="M0,0 L20,0 C15,5 10,10 5,15 C0,20 0,0 0,0 Z" fill="#ff99cc" />
+                    </svg>
+                </div>
+                
+                <div class="certificate-corner corner-bottom-right">
+                    <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0,0 L30,0 C20,10 10,20 0,30 L0,0 Z" fill="#ffcce6" />
+                        <path d="M0,0 L20,0 C15,5 10,10 5,15 C0,20 0,0 0,0 Z" fill="#ff99cc" />
+                    </svg>
+                </div>
+                
+                <!-- Ribbon -->
+                <div class="certificate-ribbon">
+                    <svg viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0,0 L180,0 L160,30 L180,60 L0,60 L20,30 L0,0 Z" fill="#ff99cc" />
+                        <path d="M0,0 L180,0 L160,30 L180,60 L0,60 L20,30 L0,0 Z" fill="none" stroke="#ffcce6" stroke-width="3" />
+                    </svg>
+                </div>
+                
+                <div class="certificate-title mt-8">Phiếu Bé Ngoan</div>
+                
+                <div class="flower-container">
+                    <div class="flower">
+                        <img src="https://i.pinimg.com/736x/7d/8f/d9/7d8fd9836f8bee14f82de1f48b1cd341.jpg" alt="Flower" class="w-full h-full">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-xl text-pink-500 mb-6">
+                Chúc bé <span id="child-name-display" class="font-bold"></span> không thiếu gì hết chỉ THIẾU NHI thôi nha!
+            </div>
+            
+            <button id="back-btn" class="candy-button w-full py-3 px-6 text-xl font-bold text-white">
+                Quay Lại
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // Create background flowers
+        function createBackgroundFlowers() {
+            const container = document.getElementById('bg-flowers');
+            const flowerColors = [
+                '#ffb3d9', '#ffcce6', '#ff99cc', '#ffd9ec'
+            ];
+            
+            for (let i = 0; i < 20; i++) {
+                const flower = document.createElement('div');
+                flower.className = 'bg-flower';
+                
+                const size = Math.random() * 60 + 30;
+                const color = flowerColors[Math.floor(Math.random() * flowerColors.length)];
+                
+                flower.style.left = `${Math.random() * 100}%`;
+                flower.style.top = `${Math.random() * 100}%`;
+                flower.style.width = `${size}px`;
+                flower.style.height = `${size}px`;
+                flower.style.animation = `sway ${Math.random() * 5 + 3}s ease-in-out infinite`;
+                flower.style.animationDelay = `${Math.random() * 5}s`;
+                
+                flower.innerHTML = `
+                    <svg width="${size}" height="${size}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50,20 C60,10 70,15 70,30 C85,15 95,25 80,40 C95,55 85,65 70,50 C70,65 60,70 50,60 C40,70 30,65 30,50 C15,65 5,55 20,40 C5,25 15,15 30,30 C30,15 40,10 50,20 Z" fill="${color}" />
+                        <circle cx="50" cy="40" r="10" fill="#ffcce6" />
+                    </svg>
+                `;
+                
+                container.appendChild(flower);
+            }
+        }
+        
+        // Loading animation
+        function startLoading() {
+            const loadingBar = document.getElementById('loading-bar');
+            const loadingPercentage = document.getElementById('loading-percentage');
+            const loadingPage = document.getElementById('loading-page');
+            const formPage = document.getElementById('form-page');
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 1;
+                loadingBar.style.width = `${progress}%`;
+                loadingPercentage.textContent = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loadingPage.classList.add('hidden');
+                        formPage.classList.remove('hidden');
+                    }, 500);
+                }
+            }, 30);
+        }
+        
+        // Car animation
+        function playCar() {
+            return new Promise((resolve) => {
+                const carContainer = document.getElementById('car-container');
+                carContainer.style.display = 'block';
+                
+                setTimeout(() => {
+                    carContainer.style.display = 'none';
+                    resolve();
+                }, 3000);
+            });
+        }
+        
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            createBackgroundFlowers();
+            startLoading();
+            
+            const formPage = document.getElementById('form-page');
+            const greetingPage = document.getElementById('greeting-page');
+            const childNameInput = document.getElementById('child-name');
+            const childNameDisplay = document.getElementById('child-name-display');
+            const submitBtn = document.getElementById('submit-btn');
+            const backBtn = document.getElementById('back-btn');
+            
+            submitBtn.addEventListener('click', async function() {
+                const name = childNameInput.value.trim();
+                if (name) {
+                    formPage.classList.add('hidden');
+                    
+                    // Play car animation
+                    await playCar();
+                    
+                    childNameDisplay.textContent = name;
+                    greetingPage.classList.remove('hidden');
+                } else {
+                    alert('Vui lòng nhập tên của em bé!');
+                }
+            });
+            
+            backBtn.addEventListener('click', function() {
+                greetingPage.classList.add('hidden');
+                formPage.classList.remove('hidden');
+                childNameInput.value = '';
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'948ad9d756aa1faf',t:'MTc0ODc0MDQzMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
